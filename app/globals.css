@@ -1,26 +1,336 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand-primary: #273A22;
+  /* Deep Forest (Footer / general deep) */
+  --color-brand-background: #F7F4EC;
+  /* Warm Canvas */
+  --color-brand-accent: #273A22;
+  /* Deep Forest (Footer / text accent) */
+  --color-brand-deep-accent: #273A22;
+  /* Deep Forest */
+  --color-brand-text: #273A22;
+  /* Deep Forest text */
+  --color-brand-border: rgba(39, 58, 34, 0.08);
+  /* 8% forest border */
+  --color-brand-border-dark: rgba(39, 58, 34, 0.2);
+
+  --color-brand-canvas: #F7F4EC;
+  /* Warm Canvas */
+  --color-brand-sage: #E8E6D8;
+  /* Soft Sage */
+  --color-brand-forest-doc: #2F3E2F;
+  /* Deep Forest (Doctor Background) */
+  --color-brand-forest-foot: #273A22;
+  /* Deep Forest (Footer Background) */
+
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #F7F4EC;
+  --foreground: #273A22;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+html,
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Custom Selection Style */
+::selection {
+  background-color: #2F3E2F;
+  color: #F7F4EC;
+}
+
+/* Lenis scroll resets */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overflow: clip;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Hide scrollbar but keep functionality if needed, though default smooth scrolling is fine. 
+   We will keep it clean. */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #EEE0CC;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(96, 116, 86, 0.3);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(96, 116, 86, 0.6);
+}
+
+/* Custom premium scroll classes and text reveal masks */
+.text-mask-wrapper {
+  overflow: hidden;
+}
+
+.text-mask-child {
+  display: inline-block;
+  transform: translateY(100%);
+}
+
+.clip-image {
+  clip-path: inset(100% 0% 0% 0%);
+}
+
+/* Noise overlay for premium analog aesthetic */
+.grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  content: "";
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Accordion slide-down / slide-up animations */
+@keyframes accordion-down {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+
+  to {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+
+  to {
+    height: 0;
+    opacity: 0;
+  }
+}
+
+.data-\[state\=open\]\:animate-accordion-down[data-state="open"] {
+  animation: accordion-down 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.data-\[state\=closed\]\:animate-accordion-up[data-state="closed"] {
+  animation: accordion-up 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+@keyframes border-trace {
+  from {
+    stroke-dashoffset: 100;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-border-trace {
+  animation: border-trace 7s linear infinite;
+}
+
+/* Shimmering Action Button (Enquire Now) */
+.enquire-btn-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.enquire-btn {
+  --border-radius: 9999px;
+  /* Fully Round */
+  --padding: 4px;
+  --transition: 0.4s;
+  --button-color: #273A22;
+  /* Deep Forest */
+
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85em 1.7em;
+  /* Taller padding */
+  font-family: var(--font-sans);
+  font-size: 11px;
+  /* Slightly bigger font */
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+
+  background-color: var(--button-color);
+  color: #F7F4EC;
+  /* Warm Canvas */
+
+  box-shadow: none;
+
+  border: solid 1px rgba(247, 244, 236, 0.15);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+
+  transition:
+    box-shadow var(--transition),
+    border var(--transition),
+    background-color var(--transition);
+}
+
+.enquire-btn::before {
+  content: "";
+  position: absolute;
+  top: calc(0px - var(--padding));
+  left: calc(0px - var(--padding));
+  width: calc(100% + var(--padding) * 2);
+  height: calc(100% + var(--padding) * 2);
+  border-radius: calc(var(--border-radius) + var(--padding));
+  pointer-events: none;
+  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.3));
+  z-index: -1;
+  transition:
+    box-shadow var(--transition),
+    filter var(--transition);
+}
+
+/* No left-to-right highlight gradients on hover */
+.enquire-btn::after {
+  display: none;
+}
+
+.enquire-btn-letter {
+  position: relative;
+  display: inline-block;
+  color: rgba(161, 149, 125, 0.6);
+  animation: letter-anim 2.9s ease-in-out infinite;
+  transition:
+    color var(--transition),
+    text-shadow var(--transition),
+    opacity var(--transition);
+}
+
+@keyframes letter-anim {
+  50% {
+    text-shadow: 0 0 4px rgba(247, 244, 236, 0.9);
+    color: #F7F4EC;
+  }
+}
+
+.enquire-btn-img {
+  height: 14px;
+  width: 14px;
+  margin-right: 0.5rem;
+  object-fit: contain;
+  transition: filter var(--transition), opacity var(--transition);
+}
+
+.enquire-txt-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.enquire-txt-1 {
+  display: flex;
+  gap: 0.02em;
+}
+
+/* Hover state: Flat design with no glow shadow */
+.enquire-btn:hover {
+  border: solid 1px rgba(247, 244, 236, 0.5);
+  background-color: #2F3E2F;
+  /* Deep Forest Doc BG */
+  box-shadow: none;
+}
+
+.enquire-btn:hover .enquire-btn-img {
+  filter: drop-shadow(0 0 2px rgba(247, 244, 236, 0.8));
+}
+
+/* Stop the left-to-right letter animation on hover and keep letters solid */
+.enquire-btn:hover .enquire-btn-letter {
+  animation: none !important;
+  color: #F7F4EC !important;
+  text-shadow: none !important;
+}
+
+/* Delay configurations for letter children */
+.enquire-btn-letter:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.enquire-btn-letter:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.enquire-btn-letter:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.enquire-btn-letter:nth-child(4) {
+  animation-delay: 0.24s;
+}
+
+.enquire-btn-letter:nth-child(5) {
+  animation-delay: 0.32s;
+}
+
+.enquire-btn-letter:nth-child(6) {
+  animation-delay: 0.4s;
+}
+
+.enquire-btn-letter:nth-child(7) {
+  animation-delay: 0.48s;
+}
+
+.enquire-btn-letter:nth-child(8) {
+  animation-delay: 0.56s;
+}
+
+.enquire-btn-letter:nth-child(9) {
+  animation-delay: 0.64s;
+}
+
+.enquire-btn-letter:nth-child(10) {
+  animation-delay: 0.72s;
+}
+
+.enquire-btn-letter:nth-child(11) {
+  animation-delay: 0.8s;
 }
