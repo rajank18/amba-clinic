@@ -82,7 +82,6 @@ export default function Gallery() {
                 <SwiperSlide key={i} className="relative w-full h-full">
                   <img
                     src={image.src}
-                    alt={image.alt}
                     className="w-full h-full object-cover select-none"
                   />
                   {/* Subtle caption overlay */}
