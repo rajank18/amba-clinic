@@ -3,6 +3,7 @@
 import React from "react";
 import { ParallaxImage } from "@/components/ui/parallax-image";
 import { Reveal, FadeIn } from "@/components/ui/reveal";
+import Image from "next/image";
 
 export default function Doctor() {
   return (
@@ -14,17 +15,18 @@ export default function Doctor() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           {/* Left Column: Portrait */}
           <div className="lg:col-span-5 w-full relative z-0">
-            <div className="aspect-[3/4] w-full relative">
-              <ParallaxImage
-                src="/images/doctor.png"
+            <div className="aspect-[3/4] w-full relative overflow-hidden border border-black/5">
+              <Image
+                src="/images/dr_image.webp"
                 alt="Dr. Maheshwari Makwana, founder of Amba Clinic"
-                speed={0.2}
-                containerClassName="w-full h-full border border-black/5"
+                fill
+                priority
+                className="object-cover object-top"
               />
             </div>
             {/* Subtle label */}
             <div className="absolute -bottom-6 left-0 text-[9px] tracking-[0.25em] uppercase text-brand-canvas/40 font-mono">
-              Founder & Clinical Director
+              Dr. Maheshwari Makwana - Owner
             </div>
           </div>
 

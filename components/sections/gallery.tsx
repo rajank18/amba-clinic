@@ -84,12 +84,12 @@ export default function Gallery() {
                     src={image.src}
                     className="w-full h-full object-cover select-none"
                   />
-                  {/* Subtle caption overlay */}
+                  {/* Subtle caption overlay
                   <div className="absolute bottom-4 left-6 z-10 hidden sm:block">
                     <span className="text-[10px] font-mono tracking-widest uppercase text-white/70 bg-black/25 backdrop-blur-sm px-3 py-1.5 border border-white/5">
                       {image.alt}
                     </span>
-                  </div>
+                  </div> */}
                 </SwiperSlide>
               ))}
             </Swiper>

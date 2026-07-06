@@ -47,14 +47,30 @@ export default function Home() {
 
       {/* Consultation Booking Dialog */}
       <Dialog open={isBookOpen} onOpenChange={setIsBookOpen}>
-        <DialogContent className="max-w-[95vw] md:max-w-4xl">
+        <DialogContent
+          className="
+    w-[95vw]
+    max-w-[95vw]
+    sm:max-w-2xl
+    lg:max-w-4xl
+    h-auto
+    max-h-[90dvh]
+    overflow-y-auto
+    p-4
+    sm:p-6
+  "
+        >
           <DialogHeader className="mb-4">
             <DialogTitle>Enquire Now</DialogTitle>
             <DialogDescription>
               Connect directly via WhatsApp or submit a detailed email enquiry below.
             </DialogDescription>
           </DialogHeader>
-          <Contact inline={false} onSuccessClose={() => setIsBookOpen(false)} />
+
+          <Contact
+            inline={false}
+            onSuccessClose={() => setIsBookOpen(false)}
+          />
         </DialogContent>
       </Dialog>
 
