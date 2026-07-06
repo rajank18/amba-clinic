@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Navbar from "@/components/sections/navbar";
 import Hero from "@/components/sections/hero";
+import Gallery from "@/components/sections/gallery";
 import Philosophy from "@/components/sections/philosophy";
 import Treatments from "@/components/sections/treatments";
 import Doctor from "@/components/sections/doctor";
@@ -31,6 +32,7 @@ export default function Home() {
       {/* Main Sections */}
       <main className="flex-1 w-full flex flex-col">
         <Hero />
+        <Gallery />
         <Philosophy />
         <Treatments onBookClick={() => setIsBookOpen(true)} />
         <Doctor />

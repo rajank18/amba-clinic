@@ -3,7 +3,6 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ArrowDown } from "lucide-react";
-import { ParallaxImage } from "@/components/ui/parallax-image";
 import { Button } from "@/components/ui/button";
 
 export default function Hero() {
